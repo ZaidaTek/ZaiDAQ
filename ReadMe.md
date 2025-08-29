@@ -10,6 +10,12 @@
 
 ## Latest
 
+`2025-08-29` -- Experimental teaser
+
+![image doc/blog/2025-08-29_experimental.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-29_experimental.png "There are a lot of implications pertaining non-ANSI data output...")
+
+
+
 `2025-08-17` -- Not sure if EMI is causing packet loss, or if changing signals' packets interpreted within Wine somehow result in packets interpreted as loss
 
 ![image doc/blog/2025-08-17_packet-loss.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-17_packet-loss.png "It's still that one PCB you see in the pic in the Electrical part of the ReadMe.")
