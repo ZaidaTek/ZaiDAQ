@@ -1,0 +1,6 @@
+{
+    "target": "./zdaq",
+    "sources": ["./zdaq.c"],
+    "include": ["../ZDK/ZTM", "../ZDK/ZTL", "../ZDK/ZDX"],
+    "link": ["ZTM", "ZTL", "ZDX"]
+}

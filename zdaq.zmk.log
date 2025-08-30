@@ -1,0 +1,120 @@
+{
+    "target": "/home/andi/code/c/ZaiDAQ/zdaq",
+    "sources": {
+        "/home/andi/code/c/ZaiDAQ/zdaq.c": {
+            "handle": "gcc"
+        }
+    },
+    "include": [
+        "/home/andi/code/c/ZDK/ZTM",
+        "/home/andi/code/c/ZDK/ZTL",
+        "/home/andi/code/c/ZDK/ZDX"
+    ],
+    "link": [
+        "ZTM",
+        "ZTL",
+        "ZDX"
+    ],
+    "zmake": "250830",
+    "host": {
+        "['date']": [
+            "2025-08-31T00:27:07 CEST"
+        ],
+        "['zmake', '--version']": [
+            "zmake-wrn: version",
+            "250830"
+        ],
+        "['neofetch', '--stdout']": [
+            "andi@ztk-dt-andi ",
+            "---------------- ",
+            "OS: LMDE 6 (faye) x86_64 ",
+            "Kernel: 6.12.38+deb12-rt-amd64 ",
+            "Uptime: 14 hours, 37 mins ",
+            "Packages: 3167 (dpkg), 47 (flatpak) ",
+            "Shell: bash 5.2.15 ",
+            "Resolution: 1920x1080 ",
+            "DE: Cinnamon 6.4.8 ",
+            "WM: Mutter (Muffin) ",
+            "WM Theme: Mint-Y-Dark-Red (Mint-Y) ",
+            "Theme: Mint-Y-Dark-Red [GTK2/3] ",
+            "Icons: Mint-Y-Yaru [GTK2/3] ",
+            "Terminal: gnome-terminal ",
+            "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
+            "GPU: AMD ATI Radeon RX 470/480/570/570X/580/580X/590 ",
+            "Memory: 1879MiB / 15918MiB "
+        ],
+        "['gcc', '--version']": [
+            "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
+            "Copyright (C) 2022 Free Software Foundation, Inc.",
+            "This is free software; see the source for copying conditions.  There is NO",
+            "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+        ],
+        "['g++', '--version']": [
+            "g++ (Debian 12.2.0-14+deb12u1) 12.2.0",
+            "Copyright (C) 2022 Free Software Foundation, Inc.",
+            "This is free software; see the source for copying conditions.  There is NO",
+            "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+        ]
+    },
+    "commands": {
+        "compile": [
+            [
+                "gcc",
+                "-fexpensive-optimizations",
+                "-flto",
+                "-O3",
+                "-Wfatal-errors",
+                "-Werror",
+                "-Wall",
+                "-Wextra",
+                "-I/home/andi/code/c/ZDK/ZTM",
+                "-I/home/andi/code/c/ZDK/ZTL",
+                "-I/home/andi/code/c/ZDK/ZDX",
+                "-c",
+                "/home/andi/code/c/ZaiDAQ/zdaq.c",
+                "-o",
+                "/home/andi/code/c/ZaiDAQ/zdaq.c.o"
+            ]
+        ],
+        "link": [
+            [
+                "gcc",
+                "/home/andi/code/c/ZaiDAQ/zdaq.c.o",
+                "-o",
+                "/home/andi/code/c/ZaiDAQ/zdaq",
+                "-flto",
+                "-O3",
+                "-s",
+                "-lZTM",
+                "-lZTL",
+                "-lZDX",
+                "-L/home/andi/code/c/ZDK/ZTM",
+                "-L/home/andi/code/c/ZDK/ZTL",
+                "-L/home/andi/code/c/ZDK/ZDX"
+            ]
+        ],
+        "clean": [
+            [
+                "rm",
+                "/home/andi/code/c/ZaiDAQ/zdaq.c.o"
+            ]
+        ],
+        "finish": []
+    },
+    "objects": {
+        "/home/andi/code/c/ZaiDAQ/zdaq.c.o": {
+            "handle": "gcc"
+        }
+    },
+    "sign": {
+        "['md5sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
+            "ef7aff79419faee4bebbec823509abe1"
+        ],
+        "['sha1sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
+            "45e57a2d4d4ffff6525779257981090d526b4dbd"
+        ],
+        "['sha256sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
+            "b71d56144221de5fc7b43bc2766cb5a6f1f172f7c77f1ac0ee1ad5a3106eadcd"
+        ]
+    }
+}
