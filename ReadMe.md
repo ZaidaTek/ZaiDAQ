@@ -10,6 +10,12 @@
 
 ## Latest
 
+`2025-08-31` -- A [preliminary-experimental ZaiDAQ release](https://github.com/ZaidaTek/ZaiDAQ/releases) has been added to the repository; full expansion of this ReadMe to include installation instructions are to follow
+
+![image doc/blog/2025-08-31_das-kraken.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-31_das-kraken.png "2004 and 2006, the first live giant squid footages in the world; only recently, the colossal squid now too!")
+
+
+
 `2025-08-30` -- Polishing for first experimental release...
 
 ![image doc/blog/2025-08-30_version.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-30_version.png "...'YYDDD 'is even shorter! :P")
