@@ -12,7 +12,7 @@
 
 `2025-08-30` -- Polishing for first experimental release...
 
-![image doc/blog/2025-08-30_version.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-30_version.png "...'DDOOO 'is even shorter! :P")
+![image doc/blog/2025-08-30_version.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-30_version.png "...'YYDDD 'is even shorter! :P")
 
 
 
