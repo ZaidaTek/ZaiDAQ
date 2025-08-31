@@ -10,7 +10,7 @@
 
 ## Latest
 
-`zdaq` - A free set minimalist of DAQ-tools and -utilities ([Download](https://github.com/ZaidaTek/ZaiDAQ/releases/tag/zdaq-v250831))
+`zdaq` - A free set of minimalist DAQ-tools and -utilities ([Download](https://github.com/ZaidaTek/ZaiDAQ/releases/tag/zdaq-v250831))
 
 Note: Presently, only the ATmega328p controllers are supported, and currently only 10-bit analog input on all eight channels at a maximum combined sampling rate of 100kS/s is supported. See the existing [ZaidaScope](https://github.com/ZaidaTek/ZaidaScope/blob/master/scope/ReadMe.md) documentation for more in-depth details and limitations, as zdaq merely strips away the GUI and gives the user direct access to the measurement data.
 
