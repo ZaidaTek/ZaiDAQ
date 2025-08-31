@@ -10,7 +10,8 @@
 
 ## Latest
 
-`2025-08-31` -- A Windows version [preliminary-experimental ZaiDAQ release](https://github.com/ZaidaTek/ZaiDAQ/releases) has also been added to the repository
+`2025-08-31` -- A full expansion of this ReadMe to include installation instructions remains at large  
+`2025-08-31` -- A Windows [preliminary-experimental ZaiDAQ release](https://github.com/ZaidaTek/ZaiDAQ/releases) has also been added to the repository
 
 ![image doc/blog/2025-08-31_HelloMyOldFriend.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-08-31_HelloMyOldFriend.png "Having avoided Vista, I was late to 7, convinced it was just as messy; I made up for that, I think.")
 
