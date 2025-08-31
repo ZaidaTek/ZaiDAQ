@@ -25,8 +25,14 @@
 #define ZDQ_DEFAULT_DEVICE_SAMPLES (10 * ZDQ_DEFAULT_DEVICE_SPEED / 100)
 #define ZDQ_DEFAULT_SAMPLE_FORMAT ZDQ_FORMAT_BASE10
 #define ZDQ_DEFAULT_SAMPLE_FILTER (ZDQ_FILTER_HEAD | ZDQ_FILTER_TAIL)
+#ifdef ZTL__OS__WINDOWS
+#define ZDQ_DEFAULT_PRINT_DELIMIT "\t"
+#define ZDQ_DEFAULT_PRINT_NEWLINE "\r\n"
+#else
 #define ZDQ_DEFAULT_PRINT_DELIMIT "\t"
 #define ZDQ_DEFAULT_PRINT_NEWLINE "\n"
+#endif // OS Multiplexer
+
 ZT_TIME gUserSleep;
 ZT_TIME gUserPrint;
 const ZT_CHAR *gUserDevice;
@@ -95,7 +101,7 @@ more:\n\
  -b <uint,dec> ## system # flush/ms, 0: always # def: 125\n\
  -f <uint,hex> ## sample # format, 0x0: u32, (#0x1: flt), 0x2: bs2, 0xa: bs10, 0x10: bs16 # def: 0xa\n\
  -i <uint,hex> ## sample # filter, 0x1: head, 0x100: tail # def: 0x101 == head,tail\n\
- -n <str>      ## sample # newline # def: \"\\n\"\n\
+ -n <str>      ## sample # newline # def: \"\\n\" [Windows: \"\\r\\n\"]\n\
  -d <str>      ## sample # delimit # def: \"\\t\"\n\
 todo:\n\
 #-u <uint,hex> ## device # unit/type, 0x100: AT328 # def: 0x100\n\
@@ -115,6 +121,8 @@ zdaq -d \",\" -n $'\\r\\n' \"/dev/ttyUSB0\" > \"samples.csv\"\n\
 ##> Same as previous, but uses CRLF instead of LF for newline-feeds\n\
 zdaq -l 0 \"/dev/ttyUSB0\"\n\
 ##> Continous sampling\n\
+zdaq \"\\\\.\\COM3\" \n\
+##> [Windows:] Open device 'COM3' with default settings\n\
 # Notes:\n\
 ##> head-filtering discards first ADC-sample\n\
 ##> tail-filtering discards trailing buffer samples\n\
@@ -128,6 +136,13 @@ unsigned int volatile gSys_NoHalt;
 unsigned int volatile gSys_Error;
 unsigned int volatile gSys_Warning;
 void gSys_Interrupt(int iSignal) {(void)iSignal; gSys_NoHalt = 0x0; gSys_Warning = ZDQ_WARN_QUIT;};
+
+#ifdef ZTL__OS__WINDOWS
+#define ZDQ_DevicePathValid(iAddress) (0x1)
+#else
+#define ZDQ_DevicePathValid(iAddress) (ZTL_FileInfo(iAddress)->path != NULL)
+#endif // OS Multiplexer
+
 int main(int iArgC, char **iArgV) {
 	// INIT
 	gSys_NoHalt = 0x1;
@@ -185,7 +200,7 @@ int main(int iArgC, char **iArgV) {
 	if (!gSys_Error && !(gSys_Warning == ZDQ_WARN_HELP || gSys_Warning == ZDQ_WARN_VERSION)) {
 		if (optind < iArgC) {
 			gUserDevice = (const ZT_CHAR*)iArgV[optind];
-			if (ZTL_FileInfo(gUserDevice)->path != NULL) {
+			if (ZDQ_DevicePathValid(gUserDevice)) {
 				ZDX_DEVICE* lDevice;
 				if ((lDevice = ZDX_New(gUserDevice, ZDX_DEVICE_TYPE_AT328P)) != NULL) {
 					ZDX_Assign(lDevice, ZDX_TASK_ADC, gUserConfig, gUserRate);
