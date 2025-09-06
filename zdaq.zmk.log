@@ -25,7 +25,7 @@
     "zmake": "250906",
     "host": {
         "['date']": [
-            "2025-09-06T18:21:09 CEST"
+            "2025-09-06T18:29:06 CEST"
         ],
         "['zmake', '--version']": [
             "zmake-v250906"
@@ -35,7 +35,7 @@
             "---------------- ",
             "OS: LMDE 6 (faye) x86_64 ",
             "Kernel: 6.12.38+deb12-rt-amd64 ",
-            "Uptime: 7 hours, 54 mins ",
+            "Uptime: 8 hours, 2 mins ",
             "Packages: 3173 (dpkg), 51 (flatpak) ",
             "Shell: bash 5.2.15 ",
             "Resolution: 1920x1080 ",
@@ -47,7 +47,7 @@
             "Terminal: gnome-terminal ",
             "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
             "GPU: AMD ATI Radeon RX 7700 XT / 7800 XT ",
-            "Memory: 2819MiB / 15918MiB "
+            "Memory: 2898MiB / 15918MiB "
         ],
         "['gcc', '--version']": [
             "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
@@ -109,13 +109,13 @@
     },
     "sign": {
         "['md5sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "87f8e6eb12795191bc26ddde2c1fdddc"
+            "3299278c8a4a008d235f57da7733b73b"
         ],
         "['sha1sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "50121ace01e319395614fe1064bedba8e3cb4152"
+            "65b03452d92f618078a58879641aa5431c8a585b"
         ],
         "['sha256sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "e592a9babb58f8869302dc403bed727968b49df1db799b1be7ae5f11496eafee"
+            "cf2715b2919bd5ce71d617c8cd20aaceb4e83fd90e75c9fa1c91475e1ac94e76"
         ]
     }
 }

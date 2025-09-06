@@ -253,8 +253,8 @@ int main(int iArgC, char **iArgV) {
 											}
 											if (!gSys_NoHalt || !(lNow - lPrint < gUserPrint)) {lPrint = lNow; fflush(stdout);}
 										} while (gSys_NoHalt && (!gUserSample || lAcquire));
-										ZDX_DataFree(lBuffer);
 									}
+									ZDX_DataFree(lBuffer);
 								} else {
 									gSys_Error = ZDQ_ERR_SYS_MMB;
 								}
