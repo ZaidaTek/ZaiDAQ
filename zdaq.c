@@ -19,6 +19,7 @@
 
 #define ZDQ_DEFAULT_SYSTEM_SLEEP 4
 #define ZDQ_DEFAULT_SYSTEM_PRINT 125
+#define ZDQ_DEFAULT_DEVICE_TASK ZDX_TASK_ADC
 #define ZDQ_DEFAULT_DEVICE_CONFIG 0xff
 #define ZDQ_DEFAULT_DEVICE_BUFFER 131072
 #define ZDQ_DEFAULT_DEVICE_SPEED 1600
@@ -39,6 +40,7 @@ const ZT_CHAR *gUserDevice;
 const char *gUser_Delimit;
 ZT_FLAG gUserFormat;
 ZT_FLAG gUserConfig;
+ZT_FLAG gUserTask;
 ZT_FLAG gUserFilter;
 ZT_INDEX gUserRate;
 ZT_INDEX gUserBuffer;
@@ -76,13 +78,15 @@ const char *gSys_MessageError[ZDQ_ERR_COUNT] = {
 #define ZDQ_WARN_NONE 0
 #define ZDQ_WARN_UNKNOWN 1
 #define ZDQ_WARN_QUIT 2
-#define ZDQ_WARN_VERSION 3
-#define ZDQ_WARN_HELP 4
+#define ZDQ_WARN_NOTASK 3
+#define ZDQ_WARN_VERSION 4
+#define ZDQ_WARN_HELP 5
 #define ZDQ_WARN_LAST ZDQ_WARN_HELP
 #define ZDQ_WARN_COUNT ZDQ_WARN_LAST
 const char *gSys_MessageWarning[ZDQ_WARN_COUNT] = {
 	"wrn: unknown",
 	"wrn: interrupt",
+	"wrn: no task specified",
 	ZDQ_TITLE "-v" ZDQ_VERSION,
 	"\
 # Message-of-this-Version [" ZDQ_TITLE "-v" ZDQ_VERSION "]:\n\
@@ -93,6 +97,7 @@ zdaq [options] <device>\n\
 main:\n\
  -v            ## system # version\n\
  -h            ## system # help\n\
+ -t <uint,hex> ## device # task, (#0x10DII, #0x20: DIO, #0x21: PWM), 0x40: ADC, (#0x80: DAC) # def: 0x40\n\
  -c <uint,hex> ## device # config # def: 0xff == a0-a7\n\
  -r <uint,dec> ## device # rate/0.01Hz # def: 1600 == 16Hz\n\
  -l <uint,dec> ## sample # count, 0: continuous # def: 160\n\
@@ -105,7 +110,6 @@ more:\n\
  -d <str>      ## sample # delimit # def: \"\\t\"\n\
 todo:\n\
 #-u <uint,hex> ## device # unit/type, 0x100: AT328 # def: 0x100\n\
-#-t <uint,hex> ## device # task, (#0x10DII, #0x20: DIO, #0x21: PWM), 0x40: ADC, (#0x80: DAC) # def: 0x40\n\
 #-w <uint,dec> ## device # grace/ms # def: 3000\n\
 #-M            ## sample # map samples to device ports, zero-fill unsampled channels\n\
 #-O <str>      ## fscale # offset, matching no. of CSVs # def: \"0.0,0.0,...,0.0\"\n\
@@ -154,6 +158,7 @@ int main(int iArgC, char **iArgV) {
 	gUserPrint = ZDQ_DEFAULT_SYSTEM_PRINT;
 	
 	gUserDevice = NULL;
+	gUserTask = ZDQ_DEFAULT_DEVICE_TASK;
 	gUserConfig = ZDQ_DEFAULT_DEVICE_CONFIG;
 	gUserFilter = ZDQ_DEFAULT_SAMPLE_FILTER;
 	gUserRate = ZDQ_DEFAULT_DEVICE_SPEED;
@@ -171,10 +176,11 @@ int main(int iArgC, char **iArgV) {
 	setvbuf(stdout, NULL, _IONBF, 0);
 	signal(SIGINT, gSys_Interrupt);
 	opterr = 0;
-	for (int lFlag; (lFlag = getopt(iArgC, iArgV, "vhc:r:l:i:e:b:n:d:f:")) != -1;) {
+	for (int lFlag; (lFlag = getopt(iArgC, iArgV, "vhc:r:l:i:e:b:n:d:f:t:")) != -1;) {
 		switch (lFlag) {
 			case 'v': gSys_Warning = ZDQ_WARN_VERSION; break;
 			case 'h': gSys_Warning = ZDQ_WARN_HELP; break;
+			case 't': gUserTask = strtoul(optarg, NULL, 16); break;
 			case 'c': gUserConfig = strtoul(optarg, NULL, 16); break;
 			case 'r': gUserRate = strtoul(optarg, NULL, 10); break;
 			case 'l': gUserSample = strtoul(optarg, NULL, 10); break;
@@ -185,7 +191,7 @@ int main(int iArgC, char **iArgV) {
 			case 'n': gUserPrintNL = (const ZT_CHAR*)optarg; break;
 			case 'd': gUserPrintTab = (const ZT_CHAR*)optarg; break;
 			case '?':
-				if (optopt == 'c' || optopt == 'r' || optopt == 'l' || optopt == 'i' || optopt == 'e' || optopt == 'b' || optopt == 'n' || optopt == 'd' || optopt == 'f') {
+				if (optopt == 'c' || optopt == 'r' || optopt == 'l' || optopt == 'i' || optopt == 'e' || optopt == 'b' || optopt == 'n' || optopt == 'd' || optopt == 'f' || optopt == 't') {
 					gSys_Error = ZDQ_ERR_USR_PRM;
 				} else {
 					gSys_Error = ZDQ_ERR_USR_UNK;
@@ -203,52 +209,60 @@ int main(int iArgC, char **iArgV) {
 			if (ZDQ_DevicePathValid(gUserDevice)) {
 				ZDX_DEVICE* lDevice;
 				if ((lDevice = ZDX_New(gUserDevice, ZDX_DEVICE_TYPE_AT328P)) != NULL) {
-					ZDX_Assign(lDevice, ZDX_TASK_ADC, gUserConfig, gUserRate);
-					lDevice->flag |= ZDX_DEVICE_FLAG_UNBUFFERED;
-					ZDX_DATA* lBuffer;
-					if ((lBuffer = ZDX_DataNew(lDevice, gUserBuffer)) != NULL) {
-						ZDX_Connect(lDevice);
-						if ((gSys_Error = (lDevice->interface.runtime != NULL) ? ZDQ_ERR_NONE : ZDQ_ERR_SYS_CON) != ZDQ_ERR_SYS_CON) {
-							ZT_INDEX lAcquire = gUserSample;
-							ZT_INDEX lChannels = ZTM_BitCount(gUserConfig);
-							ZT_FLAG lRead = ZDQ_FILTER_HEAD;
-							ZT_INDEX lCount = 0;
-							ZT_TIME lNow = ZTL_Tick();
-							ZT_TIME lPrint = lNow - gUserPrint;
-							void (*lFormat)(ZT_U) = (gUserFormat == ZDQ_FORMAT_BASE16) ? &ZWV_AddHex : ((gUserFormat == ZDQ_FORMAT_BASE2) ? &ZWV_AddBin : &ZWV_AddUnsigned);
-							do {
-								lNow = ZTL_Tick();
-								ZT_INDEX lCursorR = ZDX_DataGetCursor(lBuffer);
-								if (ZDX_Read(lDevice, lBuffer)) {
-									ZT_INDEX lCursorW = ZDX_DataGetCursor(lBuffer);
-									while (lCursorR != lCursorW) {
-										lRead |= lAcquire ? 0x0 : ZDQ_FILTER_TAIL;
-										if (!gUserSample || !(lRead & gUserFilter)) {
-											if (lAcquire) {--lAcquire;};
-											ZT_U* lLine = ZDX_DataGetLine(lBuffer, lCursorR);
-											if (gUserFormat) {
-												ZWV_Empty();
-												for (ZT_INDEX i = 0; i < lChannels; ++i) {if (i) {ZWV_Add(gUserPrintTab);} lFormat(lLine[i]);}
-												ZWV_Add(gUserPrintNL);
-												fwrite(gUserWeave.data.payload, sizeof(ZT_CHAR), gUserWeave.data.length, stdout);
-											} else {
-												fwrite(lLine, sizeof(ZT_U), lChannels, stdout);
+					switch (gUserTask) {
+						case ZDX_TASK_ADC: {
+								ZDX_Assign(lDevice, ZDX_TASK_ADC, gUserConfig, gUserRate);
+								lDevice->flag |= ZDX_DEVICE_FLAG_UNBUFFERED;
+								ZDX_DATA* lBuffer;
+								if ((lBuffer = ZDX_DataNew(lDevice, gUserBuffer)) != NULL) {
+									ZDX_Connect(lDevice);
+									if ((gSys_Error = (lDevice->interface.runtime != NULL) ? ZDQ_ERR_NONE : ZDQ_ERR_SYS_CON) != ZDQ_ERR_SYS_CON) {
+										ZT_INDEX lAcquire = gUserSample;
+										ZT_INDEX lChannels = ZTM_BitCount(gUserConfig);
+										ZT_FLAG lRead = ZDQ_FILTER_HEAD;
+										ZT_INDEX lCount = 0;
+										ZT_TIME lNow = ZTL_Tick();
+										ZT_TIME lPrint = lNow - gUserPrint;
+										void (*lFormat)(ZT_U) = (gUserFormat == ZDQ_FORMAT_BASE16) ? &ZWV_AddHex : ((gUserFormat == ZDQ_FORMAT_BASE2) ? &ZWV_AddBin : &ZWV_AddUnsigned);
+										do {
+											lNow = ZTL_Tick();
+											ZT_INDEX lCursorR = ZDX_DataGetCursor(lBuffer);
+											if (ZDX_Read(lDevice, lBuffer)) {
+												ZT_INDEX lCursorW = ZDX_DataGetCursor(lBuffer);
+												while (lCursorR != lCursorW) {
+													lRead |= lAcquire ? 0x0 : ZDQ_FILTER_TAIL;
+													if (!gUserSample || !(lRead & gUserFilter)) {
+														if (lAcquire) {--lAcquire;};
+														ZT_U* lLine = ZDX_DataGetLine(lBuffer, lCursorR);
+														if (gUserFormat) {
+															ZWV_Empty();
+															for (ZT_INDEX i = 0; i < lChannels; ++i) {if (i) {ZWV_Add(gUserPrintTab);} lFormat(lLine[i]);}
+															ZWV_Add(gUserPrintNL);
+															fwrite(gUserWeave.data.payload, sizeof(ZT_CHAR), gUserWeave.data.length, stdout);
+														} else {
+															fwrite(lLine, sizeof(ZT_U), lChannels, stdout);
+														}
+													}
+													if (lRead & ZDQ_FILTER_HEAD) {lRead &= ~ZDQ_FILTER_HEAD;};
+													++lCount;
+													++lCursorR;
+													lCursorR %= lBuffer->block.yU;
+												}
+											} else if (gUserSleep) {
+												ZTL_Sleep(gUserSleep);
 											}
-										}
-										if (lRead & ZDQ_FILTER_HEAD) {lRead &= ~ZDQ_FILTER_HEAD;};
-										++lCount;
-										++lCursorR;
-										lCursorR %= lBuffer->block.yU;
+											if (!gSys_NoHalt || !(lNow - lPrint < gUserPrint)) {lPrint = lNow; fflush(stdout);}
+										} while (gSys_NoHalt && (!gUserSample || lAcquire));
+										ZDX_DataFree(lBuffer);
 									}
-								} else if (gUserSleep) {
-									ZTL_Sleep(gUserSleep);
+								} else {
+									gSys_Error = ZDQ_ERR_SYS_MMB;
 								}
-								if (!gSys_NoHalt || !(lNow - lPrint < gUserPrint)) {lPrint = lNow; fflush(stdout);}
-							} while (gSys_NoHalt && (!gUserSample || lAcquire));
-							ZDX_DataFree(lBuffer);
-						}
-					} else {
-						gSys_Error = ZDQ_ERR_SYS_MMB;
+							}
+							break;
+						default:
+							gSys_Warning = ZDQ_WARN_NOTASK;
+							break;
 					}
 					ZDX_Free(lDevice);
 				} else {

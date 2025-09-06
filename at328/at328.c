@@ -4,19 +4,18 @@
 ***/
 
 // v250906
-// WARNING: THE EMBEDDED CODE HERE HAS BECOME INCOMPATIBLE WITH ZSCOPE v210603 / ZDAQ-v250831 !!!
+// WARNING: THE EMBEDDED CODE HERE HAS BECOME INCOMPATIBLE WITH ZAIDASCOPE-v210603 / ZDAQ-v250831 !!!
 // DO NOT USE THIS FOR USE WITH THAT SOFTWARE, INSTEAD USE THE INCLUDED EMBEDDED CODE IN THE RELEASE FILES
 // THESE ARE THE FIRST STEPS IN UNIFYING OVERLAPPING #defines IN EMBEDDED/APPLICATION CODE
 
 #include <avr/io.h>
 
-// TODO ensure these are included as hard copies in place of symlinks in releases
 #include "ZDX__SHARED__DEF.h"
 #include "ZDX__SHARED__UAT328.h"
 
 unsigned char gBuffer[ZDX_AT328_BUFFER];
 
-void ZDX_ADC_InitClock(const unsigned long *iTimer, const unsigned char *iChannels) {
+void ZDX_AT328_ADC_InitClock(const unsigned long *iTimer, const unsigned char *iChannels) {
 	unsigned long lPrescale = 16UL * 0x2UL * (unsigned long)*iChannels;
 	unsigned char i = 0;
 	while ((*iTimer > lPrescale) && (i < 7)) {
@@ -26,7 +25,7 @@ void ZDX_ADC_InitClock(const unsigned long *iTimer, const unsigned char *iChanne
 	ADCSRB = 0x0;
 	ADCSRA = 0x80 | i;
 }
-void ZDX_ADC_InitTimer(const unsigned long *iTimer) {
+void ZDX_AT328_ADC_InitTimer(const unsigned long *iTimer) {
 	unsigned int lTimer;
 	unsigned char lPrescale;
 	if (*iTimer < 0x10000UL) {
@@ -49,7 +48,7 @@ void ZDX_ADC_InitTimer(const unsigned long *iTimer) {
 	TCCR1A = 0x0;
 	TCCR1B = 0x8 | lPrescale;
 }
-void ZDX_ADC_InitMain(unsigned char *oPort, unsigned char *oCount) {
+void ZDX_AT328_ADC_InitMain(unsigned char *oPort, unsigned char *oCount) {
 	unsigned char lADC_Config = gBuffer[8];
 	unsigned long lADC_Timer = (unsigned long)gBuffer[1] << 24;
 	lADC_Timer |= (unsigned long)gBuffer[2] << 16;
@@ -61,17 +60,17 @@ void ZDX_ADC_InitMain(unsigned char *oPort, unsigned char *oCount) {
 	DIDR0 = 0x3f;
 	DIDR1 = 0x3;
 	ADMUX |= 0x40;
-	ZDX_ADC_InitClock(&lADC_Timer, oCount);
-	ZDX_ADC_InitTimer(&lADC_Timer);
+	ZDX_AT328_ADC_InitClock(&lADC_Timer, oCount);
+	ZDX_AT328_ADC_InitTimer(&lADC_Timer);
 }
-void ZDX_ADC_Main(void) {
+void ZDX_AT328_ADC_Main(void) {
 	unsigned char lPort[ZDX_AT328_ADC_CHANNELS];
 	unsigned char lChannels;
-	ZDX_ADC_InitMain(lPort, &lChannels);
+	ZDX_AT328_ADC_InitMain(lPort, &lChannels);
 	unsigned char lTransmit;
 	unsigned char lRead = 0;
-	#define mZDX_ADC_Main_INCREMENT() lTransmit = lRead; if (++lRead == lChannels) {lRead = 0;} ADMUX &= 0xf0; ADMUX |= lPort[lRead]
-	mZDX_ADC_Main_INCREMENT();
+	#define mZDX_AT328_ADC_Main_INCREMENT() lTransmit = lRead; if (++lRead == lChannels) {lRead = 0;} ADMUX &= 0xf0; ADMUX |= lPort[lRead]
+	mZDX_AT328_ADC_Main_INCREMENT();
 	while(0x1) {
 		unsigned char lAcquire = lChannels;
 		do {
@@ -83,21 +82,21 @@ void ZDX_ADC_Main(void) {
 				UDR0 = 0x80 | (lTransmit << 3) | (lSampleH << 1) | (lSampleL >> 7);
 				while (!(UCSR0A & 0x20));
 				UDR0 = lSampleL & 0x7f;
-				mZDX_ADC_Main_INCREMENT();
+				mZDX_AT328_ADC_Main_INCREMENT();
 				--lAcquire;
 			}
 		} while (lAcquire);
 		while (!(TIFR1 & 0x2));
 		TIFR1 |= 0x2;
 	}
-	#undef mZDX_ADC_Main_INCREMENT
+	#undef mZDX_AT328_ADC_Main_INCREMENT
 }
-void ZDX_PWM_Init(const unsigned char *iConfig, const unsigned int *iTimer) {
+void ZDX_AT328_PWM_Init(const unsigned char *iConfig, const unsigned int *iTimer) {
 	DDRB = (*iConfig) & 0x3;
 	DDRD = (*iConfig) & 0xfc;
 	OCR1A = *iTimer; // shouldn't this be one less?
 }
-#define mZDX_PWM_MAIN(CONFIG, DEPTH, TYPE) \
+#define mZDX_AT328_PWM_MAIN(CONFIG, DEPTH, TYPE) \
 	unsigned char lCache = 0x0;\
 	unsigned char lConfig = *(CONFIG);\
 	unsigned TYPE lMax = *(DEPTH);\
@@ -126,14 +125,14 @@ void ZDX_PWM_Init(const unsigned char *iConfig, const unsigned int *iTimer) {
 			}\
 		}\
 	}
-void ZDX_PWM_Main8(const unsigned char *iConfig, const unsigned int *iDepth) {
-	mZDX_PWM_MAIN(iConfig, iDepth, char);
+void ZDX_AT328_PWM_Main8(const unsigned char *iConfig, const unsigned int *iDepth) {
+	mZDX_AT328_PWM_MAIN(iConfig, iDepth, char);
 }
-void ZDX_PWM_Main16(const unsigned char *iConfig, const unsigned int *iDepth) {
-	mZDX_PWM_MAIN(iConfig, iDepth, int);
+void ZDX_AT328_PWM_Main16(const unsigned char *iConfig, const unsigned int *iDepth) {
+	mZDX_AT328_PWM_MAIN(iConfig, iDepth, int);
 }
-#undef mZDX_PWM_MAIN
-void ZDX_PWM_Main(void) {
+#undef mZDX_AT328_PWM_MAIN
+void ZDX_AT328_PWM_Main(void) {
 	unsigned int lDepth;
 	unsigned int lTimer;
 	unsigned char lConfig = gBuffer[1];
@@ -141,14 +140,14 @@ void ZDX_PWM_Main(void) {
 	lTimer |= (unsigned int)gBuffer[3];
 	lDepth = (unsigned int)gBuffer[4] << 8;
 	lDepth |= (unsigned int)gBuffer[5];
-	ZDX_PWM_Init(&lConfig, &lTimer);
+	ZDX_AT328_PWM_Init(&lConfig, &lTimer);
 	if (lDepth > 0xff) {
-		ZDX_PWM_Main16(&lConfig, &lDepth);
+		ZDX_AT328_PWM_Main16(&lConfig, &lDepth);
 	} else {
-		ZDX_PWM_Main8(&lConfig, &lDepth);
+		ZDX_AT328_PWM_Main8(&lConfig, &lDepth);
 	}
 }
-void ZDX_DIO_Write(unsigned char iState) {
+void ZDX_AT328_DIO_Write(unsigned char iState) {
 	unsigned char lPortB = iState & 0x3;
 	unsigned char lPortD = iState & 0xfc;
 	PORTB &= lPortB;
@@ -156,24 +155,24 @@ void ZDX_DIO_Write(unsigned char iState) {
 	PORTD &= lPortD;
 	PORTD |= lPortD;
 }
-void ZDX_DIO_Init(unsigned char *iConfig, unsigned char *iState) {
-	ZDX_DIO_Write(*iState); // before live
+void ZDX_AT328_DIO_Init(unsigned char *iConfig, unsigned char *iState) {
+	ZDX_AT328_DIO_Write(*iState); // before live
 	DDRB = (*iConfig) & 0x3;
 	DDRD = (*iConfig) & 0xfc;
 }
-void ZDX_DIO_Main(void) {
-	ZDX_DIO_Init(&gBuffer[1], &gBuffer[2]);
+void ZDX_AT328_DIO_Main(void) {
+	ZDX_AT328_DIO_Init(&gBuffer[1], &gBuffer[2]);
 	unsigned char lConfig = gBuffer[1];
-	while(0x1) {if (UCSR0A & 0x80) {ZDX_DIO_Write(lConfig & UDR0);}}
+	while(0x1) {if (UCSR0A & 0x80) {ZDX_AT328_DIO_Write(lConfig & UDR0);}}
 }
-void ZDX_Init(void) {
+void ZDX_AT328_MainInit(void) {
 	UBRR0L = 0x0;
 	UBRR0H = 0x0;
 	UCSR0A = 0x2;
 	UCSR0B = 0x18;
 	UCSR0C = 0x6;
 }
-unsigned char ZDX_Mode(void) {
+unsigned char ZDX_AT328_MainMode(void) {
 	unsigned char lMode = 0xff;
 	unsigned char lWait = 0x1;
 	unsigned char lReceived = 0;
@@ -194,11 +193,11 @@ unsigned char ZDX_Mode(void) {
 	return lMode;
 }
 int main() {
-	ZDX_Init();
-	switch (ZDX_Mode()) {
-		case ZDX_TASK_DIO: ZDX_DIO_Main(); break;
-		case ZDX_TASK_PWM: ZDX_PWM_Main(); break;
-		case ZDX_TASK_ADC: ZDX_ADC_Main(); break;
+	ZDX_AT328_MainInit();
+	switch (ZDX_AT328_MainMode()) {
+		case ZDX_TASK_DIO: ZDX_AT328_DIO_Main(); break;
+		case ZDX_TASK_PWM: ZDX_AT328_PWM_Main(); break;
+		case ZDX_TASK_ADC: ZDX_AT328_ADC_Main(); break;
 		default: break;
 	}
 	return 0x0;
