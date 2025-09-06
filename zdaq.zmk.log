@@ -2,7 +2,9 @@
     "target": "/home/andi/code/c/ZaiDAQ/zdaq",
     "sources": {
         "/home/andi/code/c/ZaiDAQ/zdaq.c": {
-            "handle": "gcc"
+            "handle": [
+                "gcc"
+            ]
         }
     },
     "include": [
@@ -10,27 +12,31 @@
         "/home/andi/code/c/ZDK/ZTL",
         "/home/andi/code/c/ZDK/ZDX"
     ],
-    "link": [
-        "ZTM",
-        "ZTL",
-        "ZDX"
-    ],
-    "zmake": "250830",
+    "link": {
+        "handle": [
+            "gcc"
+        ],
+        "lib": [
+            "ZTM",
+            "ZTL",
+            "ZDX"
+        ]
+    },
+    "zmake": "250906",
     "host": {
         "['date']": [
-            "2025-08-31T22:47:26 CEST"
+            "2025-09-06T17:08:48 CEST"
         ],
         "['zmake', '--version']": [
-            "zmake-wrn: version",
-            "250830"
+            "zmake-v250906"
         ],
         "['neofetch', '--stdout']": [
             "andi@ztk-dt-andi ",
             "---------------- ",
             "OS: LMDE 6 (faye) x86_64 ",
             "Kernel: 6.12.38+deb12-rt-amd64 ",
-            "Uptime: 1 day, 12 hours, 57 mins ",
-            "Packages: 3167 (dpkg), 47 (flatpak) ",
+            "Uptime: 6 hours, 42 mins ",
+            "Packages: 3173 (dpkg), 51 (flatpak) ",
             "Shell: bash 5.2.15 ",
             "Resolution: 1920x1080 ",
             "DE: Cinnamon 6.4.8 ",
@@ -40,8 +46,8 @@
             "Icons: Mint-Y-Yaru [GTK2/3] ",
             "Terminal: gnome-terminal ",
             "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
-            "GPU: AMD ATI Radeon RX 470/480/570/570X/580/580X/590 ",
-            "Memory: 2231MiB / 15918MiB "
+            "GPU: AMD ATI Radeon RX 7700 XT / 7800 XT ",
+            "Memory: 2682MiB / 15918MiB "
         ],
         "['gcc', '--version']": [
             "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
@@ -60,9 +66,9 @@
         "compile": [
             [
                 "gcc",
-                "-fexpensive-optimizations",
-                "-flto",
                 "-O3",
+                "-flto",
+                "-fexpensive-optimizations",
                 "-Wfatal-errors",
                 "-Werror",
                 "-Wall",
@@ -82,15 +88,15 @@
                 "/home/andi/code/c/ZaiDAQ/zdaq.c.o",
                 "-o",
                 "/home/andi/code/c/ZaiDAQ/zdaq",
-                "-flto",
                 "-O3",
+                "-flto",
                 "-s",
-                "-lZTM",
-                "-lZTL",
-                "-lZDX",
                 "-L/home/andi/code/c/ZDK/ZTM",
                 "-L/home/andi/code/c/ZDK/ZTL",
-                "-L/home/andi/code/c/ZDK/ZDX"
+                "-L/home/andi/code/c/ZDK/ZDX",
+                "-lZTM",
+                "-lZTL",
+                "-lZDX"
             ]
         ],
         "clean": [
@@ -101,20 +107,15 @@
         ],
         "finish": []
     },
-    "objects": {
-        "/home/andi/code/c/ZaiDAQ/zdaq.c.o": {
-            "handle": "gcc"
-        }
-    },
     "sign": {
         "['md5sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "af81e6a9578633192014e69ebd5187af"
+            "57eec4522695a995054e4440d7637cd3"
         ],
         "['sha1sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "a9a1fdac2d96b84dff63ef47275b7c21a9121caa"
+            "720eca6e9a28c794fde0ce18fa7b2303fed97518"
         ],
         "['sha256sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "000642972373a8c3646665c2df22f6d7682dd13cc2e0e19cd35b11a820f99303"
+            "6dcf68c217d9772ae73e1ba3062f8a63dbabe4e99d05fe96eed5848e0c09405e"
         ]
     }
 }

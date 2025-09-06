@@ -6,7 +6,7 @@
 #include <ZDX.h>
 
 #define ZDQ_TITLE "zdaq"
-#define ZDQ_VERSION "250831"
+#define ZDQ_VERSION "250906"
 
 #define ZDQ_FORMAT_NONE 0x0
 #define ZDQ_FORMAT_FLOAT 0x1 // TODO
