@@ -47,13 +47,13 @@ void ZSDIA_Reset(void) {
     gDia.offset.grid.yU = 0;
     gDia.offset.cursor.horizontal.xU = gApp.rect.plot.w >> 2;
     gDia.offset.cursor.horizontal.yU = 3 * (gApp.rect.plot.w >> 2);
-    gDia.offset.cursor.vertical.xU = (gDev.data != NULL) ? ((1 << gDev.data->resolution) >> 2) : 0;
-    gDia.offset.cursor.vertical.yU = (gDev.data != NULL) ? (3 * ((1 << gDev.data->resolution) >> 2)) : 0;
+    gDia.offset.cursor.vertical.xU = (gDev.data != NULL) ? ((1 << gDev.data->depth) >> 2) : 0;
+    gDia.offset.cursor.vertical.yU = (gDev.data != NULL) ? (3 * ((1 << gDev.data->depth) >> 2)) : 0;
     if (gDev.data != NULL) {gDev.data->cursor = 0;}
 }
 void ZSDIA_Grid(void) {
     if (gDev.hardware != NULL && gDev.data != NULL) {
-        ZT_INDEX lSpeed = ZDX_GetSpeed(gDev.hardware);
+        ZT_INDEX lSpeed = ZDX_GetRate(gDev.hardware);
         ZT_INDEX lDiv = 1;
         while ((lSpeed + 1) / (1000 * lDiv)) {lDiv *= 10;}
         if (lSpeed) {gDia.grid.major.xU = (gDev.data->block.yU * lDiv / lSpeed);}

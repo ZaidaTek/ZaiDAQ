@@ -56,7 +56,7 @@ void ZS_Printer(void) {
         ZTK_PrintPosY(gApp.pos.xfer.y);
         ZTK_PrintBuffer();
         ZT_FLAG lUnit = ZUI_GetDataValue(gGUI.hud.measure.unit);
-        ZT_DBL lResolution = ((1 << gDev.data->resolution) - 1);
+        ZT_DBL lResolution = ((1 << gDev.data->depth) - 1);
         ZT_DBL lRange = 5.0;
         if (gUsr.hud == ZSCOPE_HUD_MEASURE) {
             ZT_U* lValue = ZDX_DataGetLastLine(gDev.data);
@@ -114,7 +114,7 @@ void ZS_Printer(void) {
             } else if (lType == 1) {
                 ZT_I lDelta = gDia.offset.cursor.horizontal.y - gDia.offset.cursor.horizontal.x;
                 if (lUnit) {
-                    ZT_DBL lTime = (1000.0 / (gDev.hardware->task.speed / 100.0)) * lDelta;
+                    ZT_DBL lTime = (1000.0 / (gDev.hardware->task.rate / 100.0)) * lDelta;
                     ZTK_PrintBufferLoad("Delta: %.2f ms", lTime);
                     ZTK_PrintBufferGetSize(&lRect);
                     ZTK_PrintPosX(gApp.pos.measure[3].x - lRect.w / 2);
@@ -382,7 +382,7 @@ void ZSUSR_CursorLevel(ZT_I iIncrement) {
     ZT_INDEX lType = ZUI_GetDataValue(gGUI.hud.cursor.type);
     if (lType == 2) {
         if (gDev.data != NULL) {
-            ZT_INDEX lMax = (1 << gDev.data->resolution);
+            ZT_INDEX lMax = (1 << gDev.data->depth);
             ZT_U* lTarget = (ZUI_GetDataValue(gGUI.hud.cursor.target)) ? &(gDia.offset.cursor.vertical.yU) : &(gDia.offset.cursor.vertical.xU);
             ZT_INDEX lIncrement;
             if (iIncrement < 0) {

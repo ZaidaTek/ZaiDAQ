@@ -134,7 +134,7 @@ void ZSDEV_Free(void) {
 void ZSDEV_LoadGUI(void) {
     if (gDev.hardware != NULL) {
         ZUI_DataValue(gGUI.menu.device.channel, ZDX_GetChannels(gDev.hardware));
-        ZUI_DataValue(gGUI.menu.device.speed, ZDX_GetSpeed(gDev.hardware));
+        ZUI_DataValue(gGUI.menu.device.speed, ZDX_GetRate(gDev.hardware));
         const ZT_CHAR* lAddress;
         if ((lAddress = gDev.hardware->address) != NULL) {
             ZUI_DataValue(gGUI.menu.device.address, ZTL_SerialPort(lAddress));
@@ -152,7 +152,7 @@ void ZSDEV_Connect(const ZT_CHAR* iAddress, ZT_INDEX iSpeed, ZT_FLAG iChannels) 
                 if ((gDev.trigger = ZDX_TriggerNew()) != NULL) {
                     gDev.trigger->type = ZDX_TRIGGER_TYPE_FALLING;
                     gDev.trigger->level.xU = -1;
-                    gDev.trigger->level.yU = (0x1 << gDev.data->resolution) >> 1;
+                    gDev.trigger->level.yU = (0x1 << gDev.data->depth) >> 1;
                     ZDX_Connect(gDev.hardware);
                     if (gDev.hardware->interface.runtime != NULL) {
                         ZSDEV_Capture(ZT_TRUE);
@@ -175,11 +175,11 @@ void ZSDEV_TriggerLevel(ZT_I iIncrement) {
             ZT_U lIncrement;
             if (iIncrement < 0) {
                 lIncrement = -iIncrement;
-                gDev.trigger->level.yU = (gDev.trigger->level.yU < lIncrement) ? ((1 << gDev.data->resolution) - lIncrement + gDev.trigger->level.yU) : (gDev.trigger->level.yU - lIncrement);
+                gDev.trigger->level.yU = (gDev.trigger->level.yU < lIncrement) ? ((1 << gDev.data->depth) - lIncrement + gDev.trigger->level.yU) : (gDev.trigger->level.yU - lIncrement);
             } else {
                 lIncrement = iIncrement;
                 gDev.trigger->level.yU += lIncrement;
-                gDev.trigger->level.yU %= (1 << gDev.data->resolution);
+                gDev.trigger->level.yU %= (1 << gDev.data->depth);
             }
         }
     }
