@@ -2,8 +2,8 @@
 **** This work is licensed under: Creative Commons Attribution-NoDerivatives 4.0 International Public License
 **** For full license text, please visit: https://creativecommons.org/licenses/by-nd/4.0/legalcode
 ***/
-#ifndef ZDX__SHARED__DEF_H_INCLUDED
-#define ZDX__SHARED__DEF_H_INCLUDED
+#ifndef ZDX_SHARED_DEFINE_H_INCLUDED
+#define ZDX_SHARED_DEFINE_H_INCLUDED
 /*
 #define ZDX_MSG_PREFIX 0xff
 #define ZDX_MSG_VERSION_MAJOR 0x1
@@ -35,4 +35,4 @@
 #define ZDX_TASK_ADC 0x40
 #define ZDX_TASK_DAC 0x80
 
-#endif // ZDX__SHARED__DEF_H_INCLUDED
+#endif // ZDX_SHARED_DEFINE_H_INCLUDED

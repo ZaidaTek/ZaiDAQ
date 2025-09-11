@@ -10,8 +10,8 @@
 
 #include <avr/io.h>
 
-#include "ZDX__SHARED__DEF.h"
-#include "ZDX__SHARED__UAT328.h"
+#include "ZDX-SHARED-DEFINE.h"
+#include "ZDX-SHARED-UAT328.h"
 
 unsigned char gBuffer[ZDX_AT328_BUFFER];
 
