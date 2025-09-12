@@ -97,7 +97,7 @@ zdaq [options] <device>\n\
 main:\n\
  -v            ## system # version\n\
  -h            ## system # help\n\
- -t <uint,hex> ## device # task, (#0x10DII, #0x20: DIO, #0x21: PWM), 0x40: ADC, (#0x80: DAC) # def: 0x40\n\
+ -T <uint,hex> ## device # task, (#0x10DII, #0x20: DIO, #0x21: PWM), 0x40: ADC, (#0x80: DAC) # def: 0x40\n\
  -c <uint,hex> ## device # config # def: 0xff == a0-a7\n\
  -r <uint,dec> ## device # rate/0.01Hz # def: 1600 == 16Hz\n\
  -l <uint,dec> ## sample # count, 0: continuous # def: 160\n\
@@ -176,11 +176,11 @@ int main(int iArgC, char **iArgV) {
 	setvbuf(stdout, NULL, _IONBF, 0);
 	signal(SIGINT, gSys_Interrupt);
 	opterr = 0;
-	for (int lFlag; (lFlag = getopt(iArgC, iArgV, "vhc:r:l:i:e:b:n:d:f:t:")) != -1;) {
+	for (int lFlag; (lFlag = getopt(iArgC, iArgV, "vhc:r:l:i:e:b:n:d:f:T:")) != -1;) {
 		switch (lFlag) {
 			case 'v': gSys_Warning = ZDQ_WARN_VERSION; break;
 			case 'h': gSys_Warning = ZDQ_WARN_HELP; break;
-			case 't': gUserTask = strtoul(optarg, NULL, 16); break;
+			case 'T': gUserTask = strtoul(optarg, NULL, 16); break;
 			case 'c': gUserConfig = strtoul(optarg, NULL, 16); break;
 			case 'r': gUserRate = strtoul(optarg, NULL, 10); break;
 			case 'l': gUserSample = strtoul(optarg, NULL, 10); break;
@@ -191,7 +191,7 @@ int main(int iArgC, char **iArgV) {
 			case 'n': gUserPrintNL = (const ZT_CHAR*)optarg; break;
 			case 'd': gUserPrintTab = (const ZT_CHAR*)optarg; break;
 			case '?':
-				if (optopt == 'c' || optopt == 'r' || optopt == 'l' || optopt == 'i' || optopt == 'e' || optopt == 'b' || optopt == 'n' || optopt == 'd' || optopt == 'f' || optopt == 't') {
+				if (optopt == 'c' || optopt == 'r' || optopt == 'l' || optopt == 'i' || optopt == 'e' || optopt == 'b' || optopt == 'n' || optopt == 'd' || optopt == 'f' || optopt == 'T') {
 					gSys_Error = ZDQ_ERR_USR_PRM;
 				} else {
 					gSys_Error = ZDQ_ERR_USR_UNK;
