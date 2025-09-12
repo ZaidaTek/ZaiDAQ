@@ -18,6 +18,12 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-12` -- I happen to have run *ZaidaScope*  for a somewhat extended period of time in Wine on Linux without issue, bar the as-of-yet unresolved issue of increased packet losses...
+
+![image doc/blog/2025-09-12_short-soak.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-12_short-soak.png "Having to reupload a sketch to set the rate is admiteddly a bit of a drag...")
+
+
+
 `2025-08-31` -- A full expansion of this ReadMe to include installation instructions remains at large  
 `2025-08-31` -- A Windows [preliminary-experimental ZaiDAQ release](https://github.com/ZaidaTek/ZaiDAQ/releases) has also been added to the repository
 
