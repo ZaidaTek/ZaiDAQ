@@ -25,7 +25,7 @@
     "zmake": "250912",
     "host": {
         "['date']": [
-            "2025-09-12T10:38:16 CEST"
+            "2025-09-12T10:44:39 CEST"
         ],
         "['zmake', '--version']": [
             "zmake-v250912"
@@ -46,7 +46,7 @@
             "Terminal: gnome-terminal ",
             "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
             "GPU: AMD ATI Radeon RX 7700 XT / 7800 XT ",
-            "Memory: 2430MiB / 15918MiB "
+            "Memory: 2472MiB / 15918MiB "
         ],
         "['gcc', '--version']": [
             "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
@@ -108,13 +108,13 @@
     },
     "sign": {
         "['md5sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "3e83aa7ce78aae20b4f1097546a889e8"
+            "9fbd4d130240d1f5e1be42ff6510e23a"
         ],
         "['sha1sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "e855af6bc4e599e50450873254ac2ea7559030d0"
+            "cc887fda5f8f73431d048bff41ea92909d424975"
         ],
         "['sha256sum', '/home/andi/code/c/ZaiDAQ/zdaq']": [
-            "4d16c37769fcd86bdb2ed42e8df685835290819c79ffda2e7c8ac7f75da5ec60"
+            "dce56a38b628c1e7f4fa16ef4055deda446e4b0d2065fff748d4177a84f0fe9b"
         ]
     }
 }

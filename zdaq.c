@@ -109,7 +109,7 @@ more:\n\
  -n <str>      ## sample # newline # def: \"\\n\" [Windows: \"\\r\\n\"]\n\
  -d <str>      ## sample # delimit # def: \"\\t\"\n\
 todo:\n\
-#-u <uint,hex> ## device # unit/type, 0x100: AT328 # def: 0x100\n\
+#-U <uint,hex> ## device # uc/type, 0x100: AT328 # def: 0x100\n\
 #-w <uint,dec> ## device # grace/ms # def: 3000\n\
 #-M            ## sample # map samples to device ports, zero-fill unsampled channels\n\
 #-O <str>      ## fscale # offset, matching no. of CSVs # def: \"0.0,0.0,...,0.0\"\n\
@@ -122,7 +122,7 @@ zdaq '/dev/ttyUSB0' > 'samples.tsv'\n\
 zdaq -d \",\" \"/dev/ttyUSB0\" > 'samples.csv'\n\
 ##> Same as previous, but uses comma- instead of tab-separation\n\
 zdaq -d \",\" -n $'\\r\\n' \"/dev/ttyUSB0\" > \"samples.csv\"\n\
-##> Same as previous, but uses CRLF instead of LF for newline-feeds\n\
+##> Same as previous, but uses CRLF instead of default for newline-feeds\n\
 zdaq -l 0 \"/dev/ttyUSB0\"\n\
 ##> Continous sampling\n\
 zdaq \"\\\\.\\COM3\" \n\
