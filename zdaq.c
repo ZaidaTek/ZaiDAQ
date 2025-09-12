@@ -26,7 +26,7 @@
 #define ZDQ_DEFAULT_DEVICE_SAMPLES (10 * ZDQ_DEFAULT_DEVICE_RATE / 100)
 #define ZDQ_DEFAULT_SAMPLE_FORMAT ZDQ_FORMAT_BASE10
 #define ZDQ_DEFAULT_SAMPLE_FILTER (ZDQ_FILTER_HEAD | ZDQ_FILTER_TAIL)
-#ifdef ZTL__OS__WINDOWS
+#ifdef ZTL_BUILD_WINDOWS
 #define ZDQ_DEFAULT_PRINT_DELIMIT "\t"
 #define ZDQ_DEFAULT_PRINT_NEWLINE "\r\n"
 #else
@@ -141,7 +141,7 @@ unsigned int volatile gSys_Error;
 unsigned int volatile gSys_Warning;
 void gSys_Interrupt(int iSignal) {(void)iSignal; gSys_NoHalt = 0x0; gSys_Warning = ZDQ_WARN_QUIT;};
 
-#ifdef ZTL__OS__WINDOWS
+#ifdef ZTL_BUILD_WINDOWS
 #define ZDQ_DevicePathValid(iAddress) (0x1)
 #else
 #define ZDQ_DevicePathValid(iAddress) (ZTL_FileInfo(iAddress)->path != NULL)
@@ -169,7 +169,7 @@ int main(int iArgC, char **iArgV) {
 	gUserPrintTab = (const ZT_CHAR*)ZDQ_DEFAULT_PRINT_DELIMIT;
 	
 	ZTM8_Zero(&gUserWeave, sizeof(gUserWeave));
-	gUserWeave.data.payload = (void*)gUserData;
+	gUserWeave.data.ptr = (void*)gUserData;
 	gUserWeave.capacity = sizeof(gUserData);
 	ZWV_Set(&gUserWeave);
 	// SYSTEM
@@ -238,7 +238,7 @@ int main(int iArgC, char **iArgV) {
 															ZWV_Empty();
 															for (ZT_INDEX i = 0; i < lChannels; ++i) {if (i) {ZWV_Add(gUserPrintTab);} lFormat(lLine[i]);}
 															ZWV_Add(gUserPrintNL);
-															fwrite(gUserWeave.data.payload, sizeof(ZT_CHAR), gUserWeave.data.length, stdout);
+															fwrite(gUserWeave.data.ptr, sizeof(ZT_CHAR), gUserWeave.data.length, stdout);
 														} else {
 															fwrite(lLine, sizeof(ZT_U), lChannels, stdout);
 														}

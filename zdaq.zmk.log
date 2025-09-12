@@ -25,7 +25,7 @@
     "zmake": "250906",
     "host": {
         "['date']": [
-            "2025-09-12T02:25:02 CEST"
+            "2025-09-12T08:08:55 CEST"
         ],
         "['zmake', '--version']": [
             "zmake-v250906"
@@ -35,7 +35,7 @@
             "---------------- ",
             "OS: LMDE 6 (faye) x86_64 ",
             "Kernel: 6.12.38+deb12-rt-amd64 ",
-            "Uptime: 1 day, 6 hours, 5 mins ",
+            "Uptime: 1 day, 11 hours, 49 mins ",
             "Packages: 3173 (dpkg), 51 (flatpak) ",
             "Shell: bash 5.2.15 ",
             "Resolution: 1920x1080 ",
@@ -47,7 +47,7 @@
             "Terminal: gnome-terminal ",
             "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
             "GPU: AMD ATI Radeon RX 7700 XT / 7800 XT ",
-            "Memory: 2767MiB / 15918MiB "
+            "Memory: 2473MiB / 15918MiB "
         ],
         "['gcc', '--version']": [
             "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",
