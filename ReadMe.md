@@ -18,6 +18,17 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-14` -- I have adapted ZDK in so far, as that it has partial support and now also supports its entire original Windows build as well again (at least according to how it worked with Windows 7/10). This has allowed me to rebuild ZaidaScope with all the current updates, refactors and code, compiler and linker optimizations on its native platform. This makes *that* (not yet publicly available) build compatible again with the current embedded firmware, and no longer with the older one (to which ZaidaScope-v210603 and zdaq-v250831 are compatible to). On Windows, the original hardware and the up-to-date software appear to function faultlessly again at 100 kHz. This possibly means that either some code in the Linux chain with regards to serial USB communication is not emulating Windows in its entirety, or that maybe it is a Windows or driver issue (as one requires a third party driver on Windows; these often add vendor-specific code, that may be missing on Linux), or maybe something else altogether.
+
+Nevertheless, this is promising.
+
+I'm aiming for a small update to the Windows build this year and am **open to bug reports or feature requests**.
+
+![image doc/blog/2025-09-14_enter-das-ding.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_enter-das-ding.png "...wait, why are the paths full of escape characters? :P")
+
+
+
+
 `2025-09-12` -- I happen to have run *ZaidaScope*  for a somewhat extended period of time in Wine on Linux without issue, bar the as-of-yet unresolved issue of increased packet losses...
 
 ![image doc/blog/2025-09-12_short-soak.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-12_short-soak.png "Having to reupload a sketch to set the rate is admiteddly a bit of a drag...")
