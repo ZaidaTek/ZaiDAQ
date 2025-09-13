@@ -21,7 +21,7 @@ void ZSDEV_WriteData(void) {
                 ++gDev.counter.record;
                 gDev.counter.record %= lLength;
             }
-            ZIO_PipedAppend(gDev.path.record, gDev.recorder->data.byte, gDev.recorder->data.length);
+            ZIO_PipedAppend(gDev.path.record, gDev.recorder->data.u8, gDev.recorder->data.length);
         }
         gDev.timestamp.record = ZTL_Tick();
     }

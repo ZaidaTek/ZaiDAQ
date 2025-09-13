@@ -5,7 +5,7 @@
 #ifndef ZS__DEFINES_H_INCLUDED
 #define ZS__DEFINES_H_INCLUDED
 
-#ifdef ZTK__OS__WINDOWS
+#ifdef ZTK_BUILD_WINDOWS
 #define ZSCOPE_FONT_WINDOW (const ZT_CHAR*)"MS Sans Serif"
 #define ZSCOPE_FONT_TITLE (const ZT_CHAR*)"MS Sans Serif"
 #else

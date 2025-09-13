@@ -19,20 +19,33 @@
 			<Add option="-Wall" />
 			<Add option="-O3" />
 			<Add option="-flto" />
-			<Add directory="../ZDK/ZTK" />
-			<Add directory="../ZDK/ZUI" />
-			<Add directory="../ZDK/ZDX" />
-			<Add directory="../ZDK/ZTX" />
+			<Add option="-fexpensive-optimizations" />
+			<Add directory="../../ZDK/ZTM" />
+			<Add directory="../../ZDK/ZTL" />
+			<Add directory="../../ZDK/ZTK" />
+			<Add directory="../../ZDK/ZTX" />
+			<Add directory="../../ZDK/ZDX" />
+			<Add directory="../../ZDK/ZUI" />
 		</Compiler>
 		<ResourceCompiler>
-			<Add directory="../ZDK/ZTK" />
+			<Add directory="../../ZDK/ZTK" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="-lZTM -lZTL -lZTK -lZUI -lZDX -lZTX" />
 			<Add option="-O3" />
 			<Add option="-s" />
 			<Add option="-flto" />
-			<Add directory=".." />
+			<Add directory="../../ZDK/ZTM" />
+			<Add directory="../../ZDK/ZTL" />
+			<Add directory="../../ZDK/ZTK" />
+			<Add directory="../../ZDK/ZTX" />
+			<Add directory="../../ZDK/ZDX" />
+			<Add directory="../../ZDK/ZUI" />
+			<Add option="-lZTM" />
+			<Add option="-lZTL" />
+			<Add option="-lZTK" />
+			<Add option="-lZTX" />
+			<Add option="-lZDX" />
+			<Add option="-lZUI" />
 		</Linker>
 		<Unit filename="ZS.c">
 			<Option compilerVar="CC" />
