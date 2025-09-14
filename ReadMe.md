@@ -18,11 +18,11 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
-`2025-09-14` -- There must be a bug somewhere, so I had a reference soak going on, that seemed to mirror what I believed to have seen and expect to see up to about 20,000s runtime
+`2025-09-14` -- There must be a bug somewhere, I had a reference soak going on, that seemed to mirror what I believed to have seen and expect to see up to about 20,000s runtime:
 
 ![image doc/blog/2025-09-14_soak-reference.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_soak-reference.png "")
 
-but then this happened sometime between t:21142s and t:21768s, less than ten minutes later
+but then this happened sometime between t:21142s and t:21768s, less than ten minutes after uploading that:
 
 ![image doc/blog/2025-09-14_some-overflow-or-bit-toggle-probably.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_some-overflow-or-bit-toggle-probably.png "")
 
