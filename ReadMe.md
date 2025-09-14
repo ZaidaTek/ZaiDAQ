@@ -18,6 +18,22 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-14` -- There must be a bug somewhere, so I had a reference soak going on, that seemed to mirror what I believed to have seen and expect to see up to about 20,000s runtime
+
+![image doc/blog/2025-09-14_soak-reference.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_soak-reference.png "")
+
+but then this happened sometime between t:21142s and t:21768s, less than ten minutes later
+
+![image doc/blog/2025-09-14_some-overflow-or-bit-toggle-probably.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_some-overflow-or-bit-toggle-probably.png "")
+
+I'm not sure what happened there, but there are other sketchy issues with the NG-packet-fail-counter, I suspect there must be a bug in there somewhere. But apart from the frequency, RX and NG counters going haywire, the program and the measurements appear to happily chugg along (though maybe this is only coincidental when it is one channel)...
+
+I've downloaded Code::Blocks v20.03 and v25.03; the former seemingly was the version that bridged the gap between the default going from 32- to 64-bit defaults. (Note: There are 32- and 64-bit versions of the Code::Blocks *IDE*, of the mingw *compiler/linker*, and then there are versions of a build's *target architectures*, too.) This is, in part, one of the reasons I've never *just* gone with the next version since v17.12, especially since otherwise the program should work good enough (and arguably never require to actually address more than 4GiB of memory in RAM). There could be performance improvements to expect from a native width build, however, as some otherwise 32-to-64-bit wrapping method likely is not being called everytime memory is addressed.
+
+Because, oh yeah, the standard included gcc/g++ in Code::Blocks v17.12 is v5.4, and it's not impossible this could also be due to an optimization error/bug on that old compiler version with `-O3 -flto` flags, so it seems now is the time to take that step. Nevertheless, I want to keep a 32-bit binary versions of ZaiDAQ-(Scope) available, but the default is now likely to switch to 64-bit as well (I mean, I suppose my Linux builds automatically are, hm...)
+
+
+
 `2025-09-14` -- The updated code in its entirety should have been pushed with the commit that includes this edit. You can build (non-release/internal-debug-only) ZaidaScope-v250906 with it like in the screenshot below, though this presently offers no extra features beyond being compatible with the latest firmware again.
 
 To do so with Code::Blocks, place both ZDK and ZaiDAQ folders in the same folder and then build the `*.cbp` projects in *order* of ZTM, ZTL, ZTK, ZTX (needs to be linked against zlib, libpng and libjpeg), ZDX, ZUI and finally ZS/ZaidaScope.
@@ -33,7 +49,6 @@ I'm aiming for a small update to the Windows build this year and am **open to bu
 Addendum, to clarfiy: Small feature updates, i.e. e.g. what's inside the *.csv.meta file can be put in the actual filename of the recording (it was to split header/payload, to simplify parsing), which I have planned, things like that, tiny quality-of-life improvements, that can go a long way.
 
 ![image doc/blog/2025-09-14_enter-das-ding.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_enter-das-ding.png "...wait, why are the paths full of escape characters? :P")
-
 
 
 
