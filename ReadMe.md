@@ -29,7 +29,8 @@ Note: Code::Blocks project files are XML-files (and can be opened in text editor
 
 Nevertheless, this is promising.
 
-I'm aiming for a small update to the Windows build this year and am **open to bug reports or feature requests**.
+I'm aiming for a small update to the Windows build this year and am **open to bug reports or feature requests**.  
+Addendum, to clarfiy: Small feature updates, i.e. e.g. what's inside the *.csv.meta file can be put in the actual filename of the recording (it was to split header/payload, to simplify parsing), which I have planned, things like that, tiny quality-of-life improvements, that can go a long way.
 
 ![image doc/blog/2025-09-14_enter-das-ding.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-14_enter-das-ding.png "...wait, why are the paths full of escape characters? :P")
 
