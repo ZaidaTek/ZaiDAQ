@@ -18,6 +18,16 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-15` -- I've managed to get an x86-64 build done. Some interesting notes: x32/CB17.12 avg. ca. 960 fps, x32/CB2503 avg. ca. 1000 fps, x64/CB2503 avg. ca. 1050 fps. Note that these are only interesting as comparative values, as the rendering system of ZaidaScope is actually unoptimized (i.e. it redraws the entire frame, it could only just draw the incremental, but one would need to split one big 2D texture into smaller segments, etc.).
+
+![image doc/blog/2025-09-15_x64.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-15_x64.png "")
+
+*Unfortunately*, juggling around two (four) build targets is slowly ...caving in my head? I can't just set `-m32` (or the other way around), at least not with the MingW OOTB from CB on either x63 or x32, it seems. Assuming one uses 64-bit as the default, one should install that, and then copy the 32-bit `-nosetup.zip` into its `Program Files (x86)` Code::Blocks folder, then from the 64-bit CB IDE under Compiler settings, point the *toolchain* to the x86 version. The auto-detect will "lock on" to a valid folder once it's found, regardless if the IDE or the compiler is 32- or 64-bit.
+
+I'll provide and still use .cbp project files myself, but going forward, it seems, I'll need to make [zmake](https://github.com/ZaidaTek/zmake) work on Windows as well, which I was intending to do for completeness, but I'm not unhappy I have a valid reason to do so as well.
+
+
+
 `2025-09-15` -- There is a bug, indeed, and it was "intentionally accepted" by me, as it was a quick workaround solution to just get some basic info out for the user. In other words: The NG- and frequency-counters going haywire from the posts of yesterday are absolutely to be expected, once a certain number of packets have been processed. This just happens the fastest if the user actually uses 100kS/s.  
 Note: This did and does not affect the *actual operation* of the program, just its info display.
 
