@@ -21,7 +21,7 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 `2025-09-15` -- There is a bug, indeed, and it was "intentionally accepted" by me, as it was a quick workaround solution to just get some basic info out for the user. In other words: The NG- and frequency-counters going haywire from the posts of yesterday are absolutely to be expected, once a certain number of packets have been processed. This just happens the fastest if the user actually uses 100kS/s.  
 Note: This did and does not affect the *actual operation* of the program, just its info display.
 
-![image doc/blog/2025-09-15_cosmetic-bug-no-impact-operation.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-15_cosmetic-bug-no-impact-operation "")
+![image doc/blog/2025-09-15_cosmetic-bug-no-impact-operation.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-15_cosmetic-bug-no-impact-operation.png "")
 
 Due to the cosmetic, non-functional-nature of this bug, it is no longer a top priority bug-chase, but a to-do-item when expanding/reworking *zdaq-scope/ZaiDAQ-Scope*'s feature set.
 
