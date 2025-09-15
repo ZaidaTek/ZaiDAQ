@@ -5,8 +5,6 @@
 #ifndef ZS_DEVICE_H_INCLUDED
 #define ZS_DEVICE_H_INCLUDED
 
-#include "ZS.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus

@@ -5,8 +5,6 @@
 #ifndef ZS__TYPES_H_INCLUDED
 #define ZS__TYPES_H_INCLUDED
 
-#include "ZS.h"
-
 typedef struct {
     ZDX_DEVICE* hardware;
     ZDX_DATA* data;

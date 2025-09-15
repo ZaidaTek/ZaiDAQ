@@ -5,8 +5,6 @@
 #ifndef ZS_DIAGRAM_H_INCLUDED
 #define ZS_DIAGRAM_H_INCLUDED
 
-#include "ZS.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus

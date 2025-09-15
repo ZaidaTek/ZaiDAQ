@@ -5,7 +5,7 @@
 #ifndef ZS_GUI_C_INCLUDED
 #define ZS_GUI_C_INCLUDED
 
-#include "ZS_GUI.h"
+#include "ZS.h"
 void ZSGUI_InitMenu(void) {
     gGUI.menu.box = ZUI_BoxNew(ZSCOPE_ID_MENU_BOX, NULL, 0x101010bf, 0xffffffff);
     gGUI.menu.title = ZUI_LabelNewFromFont(0, NULL, gText[ZSTX_TITLE], gApp.font.title);

@@ -26,13 +26,12 @@
 #define ZDQ_DEFAULT_DEVICE_SAMPLES (10 * ZDQ_DEFAULT_DEVICE_RATE / 100)
 #define ZDQ_DEFAULT_SAMPLE_FORMAT ZDQ_FORMAT_BASE10
 #define ZDQ_DEFAULT_SAMPLE_FILTER (ZDQ_FILTER_HEAD | ZDQ_FILTER_TAIL)
-#ifdef ZTL_BUILD_WINDOWS
 #define ZDQ_DEFAULT_PRINT_DELIMIT "\t"
-#define ZDQ_DEFAULT_PRINT_NEWLINE "\r\n"
+#if defined(ZTL_BUILD_WINDOWS) && (ZTL_BUILD_WINDOWS)
+	#define ZDQ_DEFAULT_PRINT_NEWLINE "\r\n"
 #else
-#define ZDQ_DEFAULT_PRINT_DELIMIT "\t"
-#define ZDQ_DEFAULT_PRINT_NEWLINE "\n"
-#endif // OS Multiplexer
+	#define ZDQ_DEFAULT_PRINT_NEWLINE "\n"
+#endif // ZTL_BUILD_WINDOWS
 
 ZT_TIME gUserSleep;
 ZT_TIME gUserPrint;
@@ -141,11 +140,11 @@ unsigned int volatile gSys_Error;
 unsigned int volatile gSys_Warning;
 void gSys_Interrupt(int iSignal) {(void)iSignal; gSys_NoHalt = 0x0; gSys_Warning = ZDQ_WARN_QUIT;};
 
-#ifdef ZTL_BUILD_WINDOWS
+#if defined(ZTL_BUILD_WINDOWS) && (ZTL_BUILD_WINDOWS)
 #define ZDQ_DevicePathValid(iAddress) (0x1)
 #else
 #define ZDQ_DevicePathValid(iAddress) (ZTL_FileInfo(iAddress)->path != NULL)
-#endif // OS Multiplexer
+#endif // ZTL_BUILD_WINDOWS
 
 int main(int iArgC, char **iArgV) {
 	// INIT

@@ -5,7 +5,7 @@
 #ifndef ZS_DIAGRAM_C_INCLUDED
 #define ZS_DIAGRAM_C_INCLUDED
 
-#include "ZS_Diagram.h"
+#include "ZS.h"
 
 void ZSDIA_Colors(void) {
     ZT_FLAG lPalette = ZTK_GetPaletteSystem();

@@ -11,9 +11,9 @@ void ZS_TextLoad(ZT_FLAG iLang) {
     switch (iLang) {
         default:
         case ZSCOPE_TEXT_LANG_EN:
-gText[ZSTX_VERSION] = (const ZT_CHAR*)"v250906";
+gText[ZSTX_VERSION] = (const ZT_CHAR*)"v250915";
 gText[ZSTX_TITLE] = (const ZT_CHAR*)"ZaidaScope";
-gText[ZSTX_WINDOW] = (const ZT_CHAR*)"ZaidaScope-v250906";
+gText[ZSTX_WINDOW] = (const ZT_CHAR*)"ZaidaScope-v250915";
 gText[ZSTX_MN_DEVICE] = (const ZT_CHAR*)"Devices";
 gText[ZSTX_MN_HELP] = (const ZT_CHAR*)"Help";
 gText[ZSTX_MN_CREDITS] = (const ZT_CHAR*)"Credits";
@@ -81,9 +81,9 @@ gText[ZSTX_HD_CUR_TARGET_1] = (const ZT_CHAR*)"Target: 1";
 gText[ZSTX_HD_CUR_TARGET_2] = (const ZT_CHAR*)"Target: 2";
 return;
         case ZSCOPE_TEXT_LANG_DE:
-gText[ZSTX_VERSION] = (const ZT_CHAR*)"v250906";
+gText[ZSTX_VERSION] = (const ZT_CHAR*)"v250915";
 gText[ZSTX_TITLE] = (const ZT_CHAR*)"ZaidaScope";
-gText[ZSTX_WINDOW] = (const ZT_CHAR*)"ZaidaScope-v250906";
+gText[ZSTX_WINDOW] = (const ZT_CHAR*)"ZaidaScope-v250915";
 gText[ZSTX_MN_DEVICE] = (const ZT_CHAR*)"Geräte";
 gText[ZSTX_MN_HELP] = (const ZT_CHAR*)"Hilfe";
 gText[ZSTX_MN_CREDITS] = (const ZT_CHAR*)"Autor";
@@ -145,7 +145,7 @@ gText[ZSTX_HD_TRI_LBL_HOLDOFF_R] = (const ZT_CHAR*)"ms";
 gText[ZSTX_HD_MES_UNIT_RAW] = (const ZT_CHAR*)"Einheit: Roh";
 gText[ZSTX_HD_MES_UNIT_PHY] = (const ZT_CHAR*)"Einheit: Physisch";
 gText[ZSTX_HD_CUR_TYPE_NONE] = (const ZT_CHAR*)"Typ: Aus";
-gText[ZSTX_HD_CUR_TYPE_TIME] = (const ZT_CHAR*)"Typ: Zeitlich";
+gText[ZSTX_HD_CUR_TYPE_TIME] = (const ZT_CHAR*)"Typ: Zeit";
 gText[ZSTX_HD_CUR_TYPE_VOLT] = (const ZT_CHAR*)"Typ: Spannung";
 gText[ZSTX_HD_CUR_TARGET_1] = (const ZT_CHAR*)"Cursor: 1";
 gText[ZSTX_HD_CUR_TARGET_2] = (const ZT_CHAR*)"Cursor: 2";

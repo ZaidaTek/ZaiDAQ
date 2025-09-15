@@ -7,6 +7,13 @@
 
 #include "ZS.h"
 
+const ZT_CHAR* gText[ZSTX_TOTAL];
+ZSCOPE_APP gApp;
+ZSCOPE_GUI gGUI;
+ZSCOPE_USER gUsr;
+ZSCOPE_DIAGRAM gDia;
+ZSCOPE_DEVICE gDev;
+
 int main(void) {
 	ZS_Init();
     while (ZTK_Main());

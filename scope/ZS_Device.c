@@ -5,7 +5,7 @@
 #ifndef ZS_DEVICE_C_INCLUDED
 #define ZS_DEVICE_C_INCLUDED
 
-#include "ZS_Device.h"
+#include "ZS.h"
 
 void ZSDEV_WriteData(void) {
     if (gDev.data != NULL) {

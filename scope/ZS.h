@@ -18,14 +18,12 @@
 #include "ZS_Device.h"
 #include "ZS_Diagram.h"
 
-const ZT_CHAR* gText[ZSTX_TOTAL];
-
-ZSCOPE_APP gApp;
-ZSCOPE_GUI gGUI;
-ZSCOPE_USER gUsr;
-
-ZSCOPE_DIAGRAM gDia;
-ZSCOPE_DEVICE gDev;
+extern const ZT_CHAR* gText[ZSTX_TOTAL];
+extern ZSCOPE_APP gApp;
+extern ZSCOPE_GUI gGUI;
+extern ZSCOPE_USER gUsr;
+extern ZSCOPE_DIAGRAM gDia;
+extern ZSCOPE_DEVICE gDev;
 
 int main(void);
 void ZS_Main(void);
