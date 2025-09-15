@@ -29,7 +29,7 @@ void ZSDEV_WriteData(void) {
 void ZSDEV_Record(ZT_FLAG iState) {
     if (gDev.data != NULL) {
         ZT_FLAG lState = (gDev.flag & ZSCOPE_DEVICE_FLAG_RECORD) ? ZT_TRUE : ZT_FALSE;
-        if (lState ^ ((iState == (ZT_FLAG)-1) ? (lState ? ZT_FALSE : ZT_TRUE) : iState)) {
+        if (lState ^ ((iState == ZT_TOGGLE) ? (lState ? ZT_FALSE : ZT_TRUE) : iState)) {
             if (lState) {
                 ZSDEV_WriteData();
                 gDev.flag &= ~ZSCOPE_DEVICE_FLAG_RECORD;
@@ -51,7 +51,7 @@ void ZSDEV_Capture(ZT_FLAG iState) {
         default:
         case ZT_TRUE: gDev.flag |= ZSCOPE_DEVICE_FLAG_CAPTURE; break;
         case ZT_FALSE: gDev.flag &= ~ZSCOPE_DEVICE_FLAG_CAPTURE; break;
-        case -1: gDev.flag ^= ZSCOPE_DEVICE_FLAG_CAPTURE; break;
+        case ZT_TOGGLE: gDev.flag ^= ZSCOPE_DEVICE_FLAG_CAPTURE; break;
     }
     gDev.flag &= ~ZSCOPE_DEVICE_FLAG_HALT;
     ZUI_DataValue(gGUI.hud.capture, (gDev.flag & ZSCOPE_DEVICE_FLAG_CAPTURE ? 0x1 : 0x0));
