@@ -18,7 +18,7 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
-`2025-09-15` -- I've managed to get an x86-64 build done. Some interesting notes: x32/CB17.12 avg. ca. 960 fps, x32/CB2503 avg. ca. 1000 fps, x64/CB2503 avg. ca. 1050 fps. Note that these are only interesting as comparative values, as the rendering system of ZaidaScope is actually unoptimized (i.e. it redraws the entire frame, it could only just draw the incremental, but one would need to split one big 2D texture into smaller segments, etc.).
+`2025-09-15` -- I've managed to get an x86-64 build done. Some interesting notes: x32/gcc5.1 avg. ca. 960 fps, x32/gcc14.2 avg. ca. 1000 fps, x64/gcc14.2 avg. ca. 1050 fps. Note that these are only interesting as comparative values, as the rendering system of ZaidaScope is actually unoptimized (i.e. it redraws the entire frame, it could only just draw the incremental, but one would need to split one big 2D texture into smaller segments, etc.).
 
 ![image doc/blog/2025-09-15_x64.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-15_x64.png "")
 
