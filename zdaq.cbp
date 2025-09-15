@@ -17,7 +17,6 @@
 			<Add option="-Wfatal-errors" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
-			<Add option="-fexpensive-optimizations" />
 			<Add option="-flto" />
 			<Add option="-O3" />
 			<Add directory="../ZDK/ZTM" />
