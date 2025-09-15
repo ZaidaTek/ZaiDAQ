@@ -27,7 +27,7 @@ Due to the cosmetic, non-functional-nature of this bug, it is no longer a top pr
 
 ZaidaScope's (and, in the process, ZDK's) code-bases have been made compatible/conformant with Code::Blocks v25.03 and to its corresponding MinGW gcc/g++ compilers/linkers (the project files themselves are unchanged with regards to CB version number).
 
-Regarding 64-bit builds: I have noticed that ZTM and ZTL basically compile without issue (`-flto` is giving me warnings in ZTM now with gcc v14.2 from CB v25.03 vs. gcc v5.1 from CB 17.12), but ZTK will require `#define` guards and discerning 32- and 64-bit builds, as Windows uses ...Hungarian Notation for its typedefs, and so, the data type themselves are hardcoded into the variable typedefs themselves, meaning that e.g. what is a "LPSTR" in 32-bit Windows becomes an "LPPTR" or something like that in 64-bit Windows, meaning you can't just switch without having to accomodate the switch.
+Regarding 64-bit builds: I have noticed that ZTM and ZTL basically compile without issue (`-flto` is giving me warnings in ZTM now with gcc v14.2 from CB v25.03 vs. gcc v5.1 from CB 17.12), but ZTK will require `#define` guards and discerning 32- and 64-bit builds, as Windows uses ...Hungarian Notation for its typedefs, and so, the data types themselves are hardcoded into the variable typedefs, meaning that e.g. what is a "LPSTR" in 32-bit Windows becomes an "LPPTR" in 64-bit Windows (or whatever they're actually called), meaning you can't just switch without having to accomodate the switch in the code.
 
 
 
