@@ -18,6 +18,12 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-23` -- I've started building `ZTK/ZTXCB`, which is the library component intended to be used for creating and event handling application windows, and drawing to them, in Linux. Once this component is functionally complete, it should be possible to build a native Linux ZaidaScope as well.
+
+![image doc/blog/2025-09-23_xcb.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-23_xcb.png "'...hinter dieser Tür, da steht ein Klavier.' :x")
+
+
+
 `2025-09-15` -- I've managed to get an x86-64 build done. Some interesting notes: x32/gcc5.1 avg. ca. 960 fps, x32/gcc14.2 avg. ca. 1000 fps, x64/gcc14.2 avg. ca. 1050 fps. Note that these are only interesting as comparative values, as the rendering system of ZaidaScope is actually unoptimized (i.e. it redraws the entire frame, it could only just draw the incremental, but one would need to split one big 2D texture into smaller segments, etc.).
 
 ![image doc/blog/2025-09-15_x64.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-15_x64.png "")
