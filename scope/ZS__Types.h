@@ -6,80 +6,80 @@
 #define ZS__TYPES_H_INCLUDED
 
 typedef struct {
-    ZDX_DEVICE* hardware;
-    ZDX_DATA* data;
-    ZDX_TRIGGER* trigger;
-    ZT_WEAVE* recorder;
-    ZT_FLAG flag;
-    struct {
-        ZT_TIME connect;
-        ZT_TIME trigger;
-        ZT_TIME record;
-    } timestamp;
-    struct {
-        ZT_INDEX trigger;
-        ZT_TIME record;
-    } counter;
-    struct {
-        ZT_INDEX trigger;
-    } stat;
-    struct {
-        ZT_CHAR* record;
-    } path;
+	ZDX_DEVICE* hardware;
+	ZDX_DATA* data;
+	ZDX_TRIGGER* trigger;
+	ZT_WEAVE* recorder;
+	ZT_FLAG flag;
+	struct {
+		ZT_TIME connect;
+		ZT_TIME trigger;
+		ZT_TIME record;
+	} timestamp;
+	struct {
+		ZT_INDEX trigger;
+		ZT_TIME record;
+	} counter;
+	struct {
+		ZT_INDEX trigger;
+	} stat;
+	struct {
+		ZT_CHAR* record;
+	} path;
 } ZSCOPE_DEVICE;
 typedef struct {
-    struct {
-        ZT_COLOR major;
-        ZT_COLOR minor;
-    } grid;
-    struct {
-        ZT_COLOR data;
-        ZT_COLOR first;
-        ZT_COLOR second;
-    } cursor;
-    ZT_COLOR background;
-    ZT_COLOR trigger;
-    ZT_COLOR plot[8];
+	struct {
+		ZT_COLOR major;
+		ZT_COLOR minor;
+	} grid;
+	struct {
+		ZT_COLOR data;
+		ZT_COLOR first;
+		ZT_COLOR second;
+	} cursor;
+	ZT_COLOR background;
+	ZT_COLOR trigger;
+	ZT_COLOR plot[8];
 } ZSCOPE_DIAGRAM_COLOR;
 typedef struct {
-    ZT_SURFACE* plot;
-    ZDX_DIAGRAM* diagram;
-    struct {
-        ZT_UPOINT data;
-        ZT_UPOINT grid;
-        struct {
-            ZT_UPOINT horizontal;
-            ZT_UPOINT vertical;
-        } cursor;
-    } offset;
-    struct {
-        ZT_POINT major;
-        ZT_POINT minor;
-    } grid;
-    ZSCOPE_DIAGRAM_COLOR color;
+	ZT_SURFACE* plot;
+	ZDX_DIAGRAM* diagram;
+	struct {
+		ZT_UPOINT data;
+		ZT_UPOINT grid;
+		struct {
+			ZT_UPOINT horizontal;
+			ZT_UPOINT vertical;
+		} cursor;
+	} offset;
+	struct {
+		ZT_POINT major;
+		ZT_POINT minor;
+	} grid;
+	ZSCOPE_DIAGRAM_COLOR color;
 } ZSCOPE_DIAGRAM;
 
 typedef struct {
-    ZT_FLAG flag;
-    ZT_FLAG lang;
-    ZT_FLAG hud;
-    ZT_FLAG renderer;
-    ZT_TIME framerate;
-    struct {
-        ZT_U address;
-        ZT_U speed;
-        ZT_U channel;
-    } device;
-    struct {
-        ZT_U unit;
-    } measure;
-    ZSCOPE_DIAGRAM_COLOR color;
+	ZT_FLAG flag;
+	ZT_FLAG lang;
+	ZT_FLAG hud;
+	ZT_FLAG renderer;
+	ZT_TIME framerate;
+	struct {
+		ZT_U address;
+		ZT_U speed;
+		ZT_U channel;
+	} device;
+	struct {
+		ZT_U unit;
+	} measure;
+	ZSCOPE_DIAGRAM_COLOR color;
 } ZSCOPE_USER;
 
 typedef struct {
 	struct {
 		ZUI_BOX* box;
-        ZUI_LABEL* title;
+		ZUI_LABEL* title;
 		struct {
 			ZUI_BUTTON* device;
 			ZUI_BUTTON* help;
@@ -88,24 +88,24 @@ typedef struct {
 			ZUI_BUTTON* exit;
 		} head;
 		struct {
-            ZUI_INCREMENT* address;
-            ZUI_INCREMENT* speed;
-            ZUI_SWITCH* channel;
+			ZUI_INCREMENT* address;
+			ZUI_INCREMENT* speed;
+			ZUI_SWITCH* channel;
 			ZUI_BUTTON* connect;
 			ZUI_BUTTON* disconnect;
 			struct {
-			    struct {
-                    ZUI_LABEL* title;
-			    } address;
-			    struct {
-                    ZUI_LABEL* title;
-                    ZUI_LABEL* right;
-			    } speed;
-			    struct {
-                    ZUI_LABEL* title;
-                    ZUI_LABEL* left;
-                    ZUI_LABEL* right;
-			    } channel;
+				struct {
+					ZUI_LABEL* title;
+				} address;
+				struct {
+					ZUI_LABEL* title;
+					ZUI_LABEL* right;
+				} speed;
+				struct {
+					ZUI_LABEL* title;
+					ZUI_LABEL* left;
+					ZUI_LABEL* right;
+				} channel;
 			} label;
 		} device;
 		struct {
@@ -122,18 +122,18 @@ typedef struct {
 	} menu;
 	struct {
 		ZUI_BUTTON* menu;
-        ZUI_SWITCH* capture;
-        ZUI_SWITCH* record;
-        ZUI_CYCLE* selector;
+		ZUI_SWITCH* capture;
+		ZUI_SWITCH* record;
+		ZUI_CYCLE* selector;
 		struct {
 			ZUI_BOX* top;
 			ZUI_BOX* bottom;
 		} box;
 		struct {
 			ZUI_CYCLE* type;
-            ZUI_BUTTON* reset;
-            ZUI_BUTTON* exportBmp;
-            ZUI_BUTTON* exportPng;
+			ZUI_BUTTON* reset;
+			ZUI_BUTTON* exportBmp;
+			ZUI_BUTTON* exportPng;
 		} diagram;
 		struct {
 			ZUI_CYCLE* mode;
@@ -141,10 +141,10 @@ typedef struct {
 			ZUI_CYCLE* channel;
 			ZUI_INCREMENT* holdoff;
 			struct {
-			    struct {
-                    ZUI_LABEL* title;
-                    ZUI_LABEL* right;
-			    } holdoff;
+				struct {
+					ZUI_LABEL* title;
+					ZUI_LABEL* right;
+				} holdoff;
 			} label;
 		} trigger;
 		struct {
@@ -158,41 +158,41 @@ typedef struct {
 } ZSCOPE_GUI;
 
 typedef struct {
-    struct {
-        ZT_FONT* window;
-        ZT_FONT* title;
-        ZT_FONT* desc;
-    } font;
-    struct {
-        ZT_INDEX counter;
-        ZT_INDEX stat;
-        ZT_TIME timestamp;
-    } fps;
-    ZT_FLAG flag;
-    ZT_FLAG menu;
-    struct {
-        ZT_TIME timestamp;
-        ZT_TIME delay;
-    } draw;
-    struct {
-        struct {
-            ZT_POINT hud;
-            ZT_POINT hudHalf;
-         } button;
-        ZT_I font;
-        ZT_I fontTitle;
-    } dim;
-    struct {
-        ZT_POINT fps;
-        ZT_POINT daq;
-        //ZT_POINT trigger;
-        ZT_POINT xfer;
-        ZT_POINT measure[8];
-    } pos;
-    struct {
-        ZT_RECT window;
-        ZT_RECT plot;
-    } rect;
+	struct {
+		ZT_FONT* window;
+		ZT_FONT* title;
+		ZT_FONT* desc;
+	} font;
+	struct {
+		ZT_INDEX counter;
+		ZT_INDEX stat;
+		ZT_TIME timestamp;
+	} fps;
+	ZT_FLAG flag;
+	ZT_FLAG menu;
+	struct {
+		ZT_TIME timestamp;
+		ZT_TIME delay;
+	} draw;
+	struct {
+		struct {
+			ZT_POINT hud;
+			ZT_POINT hudHalf;
+		 } button;
+		ZT_I font;
+		ZT_I fontTitle;
+	} dim;
+	struct {
+		ZT_POINT fps;
+		ZT_POINT daq;
+		//ZT_POINT trigger;
+		ZT_POINT xfer;
+		ZT_POINT measure[8];
+	} pos;
+	struct {
+		ZT_RECT window;
+		ZT_RECT plot;
+	} rect;
 } ZSCOPE_APP;
 
 #endif // ZS__TYPES_H_INCLUDED

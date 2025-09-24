@@ -25,7 +25,7 @@
     "zmake": "250917",
     "host": {
         "['date']": [
-            "2025-09-20T20:10:13 CEST"
+            "2025-09-24T17:30:21 CEST"
         ],
         "['zmake', '--version']": [
             "zmake-v250917"
@@ -35,18 +35,18 @@
             "---------------- ",
             "OS: LMDE 6 (faye) x86_64 ",
             "Kernel: 6.12.43+deb12-rt-amd64 ",
-            "Packages: 3170 (dpkg), 52 (flatpak) ",
+            "Packages: 3170 (dpkg), 53 (flatpak) ",
             "Shell: bash 5.2.15 ",
             "Resolution: 1920x1080 ",
             "DE: Cinnamon 6.4.8 ",
             "WM: Mutter (Muffin) ",
-            "WM Theme: Mint-L-Dark-Sand (Mint-Y) ",
-            "Theme: Mint-L-Dark-Sand [GTK2/3] ",
-            "Icons: Mint-X-Yellow [GTK2/3] ",
+            "WM Theme: Mint-Y-Dark-Sand (Mint-Y) ",
+            "Theme: Mint-Y-Dark-Sand [GTK2/3] ",
+            "Icons: Mint-Y-Sand [GTK2/3] ",
             "Terminal: gnome-terminal ",
             "CPU: AMD Ryzen 7 5700X3D (16) @ 4.149GHz ",
             "GPU: AMD ATI Radeon RX 7700 XT / 7800 XT ",
-            "Memory: 2467MiB / 15918MiB "
+            "Memory: 2602MiB / 15918MiB "
         ],
         "['gcc', '--version']": [
             "gcc (Debian 12.2.0-14+deb12u1) 12.2.0",

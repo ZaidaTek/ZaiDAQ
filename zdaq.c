@@ -278,5 +278,5 @@ int main(int iArgC, char **iArgV) {
 	if (gSys_Warning) {fprintf((gSys_Warning == ZDQ_WARN_VERSION || gSys_Warning == ZDQ_WARN_HELP) ? stdout : stderr, "%s\n", gSys_MessageWarning[gSys_Warning - 1]);}
 	if (gSys_Error) {fprintf(stderr, "%s\n", gSys_MessageError[gSys_Error - 1]);}
 	// EXIT
-    return gSys_Error;
+	return gSys_Error;
 }
