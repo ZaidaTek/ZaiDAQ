@@ -18,6 +18,12 @@ Note: Presently, only the ATmega328p controllers are supported, and currently on
 
 ### Development
 
+`2025-09-25` -- [zmake](https://github.com/ZaidaTek/zmake) is a Python3 script I'e continuously written and expanded, that's basically... well, a (very basic) 'make-system', I guess. A 'zmake'-project is defined with a JSON `project.zmk` file, that typically includes an array of sources and a target, and possibly some optional compiling or linking flags, usually to optimize. A project is built by calling e.g. `zmake -n project.zmk`, which in this case would perform a dry-run and solely print out the commands on the screen. The volume of code I've written meant I either had to start using Code::Blocks on Linux as well (still might, if I need autocomplete, etc.), 'get acquainted' with one of the known build systems, or, I guess, just churn out some script that'll get the job done. The complexity of such a make system makes Python(3) a preferable choice to e.g. using bash-scripts or similar, furthermore, Python itself is a dependency of many modern Linux systems, and zmake has no extra dependencies apart from the Python Standard-Library, meaning zmake should run OOTB on basically any Linux system (and Windows as well, as Python is/can be platform-independent).
+
+![image doc/blog/2025-09-25_zmake.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-25_zmake.png "")
+
+
+
 `2025-09-23` -- I've started building `ZTK/ZTXCB`, which is the library component intended to be used for creating and event handling application windows, and drawing to them, in Linux. Once this component is functionally complete, it should be possible to build a native Linux ZaidaScope as well.
 
 ![image doc/blog/2025-09-23_xcb.png](https://github.com/ZaidaTek/ZaidaScope/blob/master/doc/blog/2025-09-23_xcb.png "'...hinter dieser Tür, da steht ein Klavier.' :x")
